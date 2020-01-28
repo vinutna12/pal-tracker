@@ -12,7 +12,7 @@ public class WelcomeController {
 
 
     public WelcomeController(@Value("${welcome.message}") String mssg){
-        
+
         this.message = mssg;
     }
 
