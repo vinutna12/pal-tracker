@@ -48,6 +48,7 @@ public class TimeEntryControllerTest {
 
     @Test
     public void testRead() {
+
         long timeEntryId = 1L;
         long projectId = 123L;
         long userId = 456L;
