@@ -17,7 +17,7 @@ public class TimeEntryController {
         this.timeEntryRepository = timeEntryRepository;
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<TimeEntry> create(@RequestBody TimeEntry timeEntryToCreate) {
 
         TimeEntry createdTimeEntry = timeEntryRepository.create(timeEntryToCreate);
@@ -41,7 +41,7 @@ public class TimeEntryController {
         return new ResponseEntity<>(updateTimeEntry, HttpStatus.OK);
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<List<TimeEntry>> list() {
         List<TimeEntry> responseList = timeEntryRepository.list();
         return new ResponseEntity<List<TimeEntry>>(responseList,HttpStatus.OK);
