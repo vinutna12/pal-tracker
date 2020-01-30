@@ -1,0 +1,242 @@
+git remote add origin https://github.com/user/repo.git
+
+git remote add origin https://github.com/vinutna12/PAL_SpringBoot.git
+
+
+API
+    api.sys.evans.pal.pivotal.io
+Org
+    vinutnapenti.discover.com
+Username
+    vinutnapenti@discover.com
+Password
+    y5xfpq3x 
+
+space : sandbox
+
+https://api.sys.evans.pal.pivotal.io
+
+cf push pal-tracker -p /home/pal_user/workspace/pal-tracker/build/libs/pal-tracker.jar
+
+pal-tracker-bold-mouse.apps.evans.pal.pivotal.io
+
+    "PORT": "Not Set",
+        "MEMORY_LIMIT" : "Not Set",
+        "CF_INSTANCE_INDEX" : "Not Set",
+        "CF_INSTANCE_ADDR" : "Not set",
+
+cf set-env pal-tracker PORT 8084
+cf set-env pal-tracker MEMORY_LIMIT 1024G
+cf set-env pal-tracker CF_INSTANCE_INDEX 1
+cf set-env pal-tracker CF_INSTANCE_ADDR "Not set"
+
+cf set-env pal-tracker WELCOME_MESSAGE "Hello from Cloud Foundry"
+
+
+git remote set-url origin https://github.com/vinutna12/pal-tracker.git
+cf 
+
+pal-tracker-bold-mouse.apps.evans.pal.pivotal.io
+
+pal_user@magazine:~/workspace/pal-tracker$ cf routes
+Getting routes for org vinutnapenti.discover.com / space sandbox as vinutnapenti@discover.com ...
+
+space     host                     domain                      port   path   type   apps          service
+sandbox   pal-tracker-bold-mouse   apps.evans.pal.pivotal.io                        pal-tracker
+
+pal_user@magazine:~/workspace/pal-tracker$ ^C
+
+
+GIT Oath Token : 2af2e9f4277562e51d8dab0567484f76b12d3cbf
+
+
+App URL:s
+https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/
+
+cd ~/workspace/assignment-submission
+./gradlew cloudNativeDeveloperReviewPipeline -PreviewUrl=https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/
+cd ~/workspace/assignment-submission
+./gradlew cloudNativeDeveloperDatabaseMigrations -PserverUrl=https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/
+
+cd ~/workspace/assignment-submission
+./gradlew cloudNativeDeveloperDatabaseAccess -PserverUrl=https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/time-entries
+
+cd ~/workspace/assignment-submission
+./gradlew cloudNativeDeveloperDatabaseAccess -PserverUrl=https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/time-entries
+
+cd ~/workspace/assignment-submission
+./gradlew cloudNativeDeveloperHealthMonitoring -PserverUrl=https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/actuator
+
+
+cd ~/workspace/assignment-submission
+./gradlew cloudNativeDeveloperRest -PserverUrl=https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io
+
+GET https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/time-entries
+POST https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/time-entries
+GET https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/time-entries/1
+PUT https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/time-entries/1
+GET https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/time-entries/1
+DELETE https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/time-entries/1
+GET https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/time-entries/1
+
+
+curl -i https://pal-tracker-bold-mouse.apps.evans.pal.pivotal.io/time-entries
+
+
+cf create-service tracker-database
+
+cf marketplace
+
+cf create-service SERVICE PLAN SERVICE_INSTANCE [-b BROKER] [-c PARAMETERS_AS_JSON] [-t TAGS]
+
+Database creation from cf command:
+cf create-service p.mysql db-small tracker-database
+
+cf create-service p.mysql db-small tracker-allocations-database
+cf create-service p.mysql db-small tracker-backlog-database
+cf create-service p.mysql db-small tracker-registration-database
+cf create-service p.mysql db-small tracker-timesheets-database
+
+To check created service for database : 
+cf service tracker-database
+
+To check all services
+cf services
+
+Service Registry :
+
+p-service-registry            standard      Service Registry for Spring Cloud Applications                                                             p-spring-cloud-services
+
+	cf create-service p-service-registry standard  tracker-service-registry
+
+
+Database Migration:
+mysql -uroot < databases/create_databases.sql
+
+Bind application to service :
+ cf bind-service pal-s tracker-database
+
+
+List list = new ArrayList(){obj1, obj2}
+
+list -> list.next()
+
+Run individual Boot App
+./gradlew applications:registration-server:bootRun
+./gradlew applications:allocations-server:bootRun
+./gradlew applications:backlog-server:bootRun
+./gradlew applications:timesheets-server:bootRun
+
+Curl commands to test applications:
+
+curl -i -XPOST -H"Content-Type: application/json" localhost:8083/registration -d'{"name": "Pete"}'
+
+Users:
+curl -i localhost:8083/users/${USER_ID}
+Example for our case - curl -i localhost:8083/users/1
+
+Accounts:
+curl -i localhost:8083/accounts?ownerId=${USER_ID}
+curl -i localhost:8083/accounts?ownerId=1
+
+
+Projects:
+curl -i -XPOST -H"Content-Type: application/json" localhost:8083/projects -d"{\"name\": \"Basket Weaving\", \"accountId\": ${ACCOUNT_ID}}"
+curl -i -XPOST -H"Content-Type: application/json" localhost:8083/projects -d"{\"name\": \"Basket Weaving\", \"accountId\": 1}"
+
+curl -i localhost:8083/projects?accountId=${ACCOUNT_ID}
+curl -i localhost:8083/projects?accountId=1
+
+Allocations:
+curl -i -XPOST -H"Content-Type: application/json" localhost:8081/allocations -d"{\"projectId\": ${PROJECT_ID}, \"userId\": ${USER_ID}, \"firstDay\": \"2015-05-17\", \"lastDay\": \"2015-05-18\"}"
+curl -i -XPOST -H"Content-Type: application/json" localhost:8081/allocations -d"{\"projectId\": 1, \"userId\": 1, \"firstDay\": \"2015-05-17\", \"lastDay\": \"2015-05-18\"}"
+
+curl -i localhost:8081/allocations?projectId=${PROJECT_ID}
+curl -i localhost:8081/allocations?projectId=1
+
+Stories:
+curl -i -XPOST -H"Content-Type: application/json" localhost:8082/stories -d"{\"projectId\": ${PROJECT_ID}, \"name\": \"Find some reeds\"}"
+curl -i -XPOST -H"Content-Type: application/json" localhost:8082/stories -d"{\"projectId\": 1, \"name\": \"Find some reeds\"}"
+
+curl -i localhost:8082/stories?projectId=${PROJECT_ID}
+curl -i localhost:8082/stories?projectId=1
+
+Time Entries:
+curl -i -XPOST -H"Content-Type: application/json" localhost:8084/time-entries/ -d"{\"projectId\": ${PROJECT_ID}, \"userId\": ${USER_ID}, \"date\": \"2015-05-17\", \"hours\": 6}"
+
+curl -i -XPOST -H"Content-Type: application/json" localhost:8084/time-entries/ -d"{\"projectId\": 1, \"userId\": 1, \"date\": \"2015-05-17\", \"hours\": 6}"
+
+curl -i localhost:8084/time-entries?userId=${USER_ID}
+curl -i localhost:8084/time-entries?userId=1
+
+Travis Environment Variables:
+CF_API_URL - https://api.sys.evans.pal.pivotal.io
+CF_ORG - vinutnapenti.discover.com
+CF_PASSWORD - 
+CF_SPACE - sandbox
+CF_USERNAME - vinutnapenti@discover.com
+GITHUB_OAUTH_TOKEN - 66b42fd17004185ae4ecc28f46caa9f4d55d23f5
+GITHUB_USERNAME - vinutna12
+
+
+Add Routes
+route: pal-tracker-bold-mouse.apps.evans.pal.pivotal.io
+route: allocations-pal-bold-mouse.apps.evans.pal.pivotal.io
+route: registration-pal-bold-mouse.apps.evans.pal.pivotal.io
+route: backlog-pal-bold-mouse.apps.evans.pal.pivotal.io
+route: timesheets-pal-bold-mouse.apps.evans.pal.pivotal.io
+
+
+
+https://registration-pal-${UNIQUE_IDENTIFIER}.${DOMAIN}/users/${USER_ID}
+https://registration-pal-${UNIQUE_IDENTIFIER}.${DOMAIN}/accounts?ownerId=${USER_ID}
+https://registration-pal-${UNIQUE_IDENTIFIER}.${DOMAIN}/projects?accountId=${ACCOUNT_ID}
+https://allocations-pal-${UNIQUE_IDENTIFIER}.${DOMAIN}/allocations?projectId=${PROJECT_ID}
+https://backlog-pal-${UNIQUE_IDENTIFIER}.${DOMAIN}/stories?projectId=${PROJECT_ID}
+https://timesheets-pal-${UNIQUE_IDENTIFIER}.${DOMAIN}/time-entries?userId=${USER_ID}
+
+https://allocations-pal-bold-mouse.apps.evans.pal.pivotal.io
+https://registration-pal-bold-mouse.apps.evans.pal.pivotal.io
+https://backlog-pal-bold-mouse.apps.evans.pal.pivotal.io
+https://timesheets-pal-bold-mouse.apps.evans.pal.pivotal.io
+
+
+cd ~/workspace/assignment-submission
+./gradlew cloudNativeDeveloperDistributedSystemDeployment \
+    -PregistrationServerUrl=https://registration-pal-bold-mouse.apps.evans.pal.pivotal.io \
+    -PbacklogServerUrl=https://backlog-pal-bold-mouse.apps.evans.pal.pivotal.io \
+    -PallocationsServerUrl=https://allocations-pal-bold-mouse.apps.evans.pal.pivotal.io\
+    -PtimesheetsServerUrl=https://timesheets-pal-bold-mouse.apps.evans.pal.pivotal.io	
+
+Spring cloud version
+curl https://spring-cloud-broker.apps.evans.pal.pivotal.io/actuator/info
+{"git":{"commit":{"time":"2019-11-25T20:46:52Z","id":"325b9c6"},"branch":"HEAD"},
+"build":{"version":"2.1.1-build.6","artifact":"spring-cloud-service-broker","name":"service-broker","group":"io.pivotal.spring.cloud","time":"2019-11-27T19:56:41.567Z"}}	
+
+curl https://spring-cloud-service-broker.cfapps.io/actuator/info	
+
+SCS Client Starters 	Spring Boot 	Spring Cloud
+3.1.x 	2.2.x 	Hoxton.x
+3.0.x 	2.1.x 	Greenwich.x
+2.1.x 	2.1.x 	Greenwich.x
+2.0.x 	2.0.x (not 2.1.x) 	Finchley.x
+
+pal_user@magazine:~/workspace/pal-tracker-distributed$ curl https://spring-cloud-service-broker.cfapps.io/actuator/info
+{"git":{"commit":{"time":"2019-11-25T20:49:31Z","id":"6325a90"},"branch":"HEAD"},"build":{"version":"2.0.13-build.6","artifact":"spring-cloud-service-broker","name":"service-broker","group":"io.pivotal.spring.cloud","time":"2019-11-27T00:26:12.716Z"}}pal_user@magazine:~/workspace/pal-tracker-distributed$ 
+
+
+cf unset-env tracker-allocations REGISTRATION_SERVER_ENDPOINT
+cf unset-env tracker-backlog REGISTRATION_SERVER_ENDPOINT
+cf unset-env tracker-timesheets REGISTRATION_SERVER_ENDPOINT
+
+cd ~/workspace/assignment-submission
+./gradlew cloudNativeDeveloperDistributedSystemWithServiceDiscovery \
+    -PregistrationServerUrl=https://registration-pal-bold-mouse.apps.evans.pal.pivotal.io \
+    -PbacklogServerUrl=https://backlog-pal-bold-mouse.apps.evans.pal.pivotal.io \
+    -PallocationsServerUrl=https://allocations-pal-bold-mouse.apps.evans.pal.pivotal.io \
+    -PtimesheetsServerUrl=https://timesheets-pal-bold-mouse.apps.evans.pal.pivotal.io
+
+
+
+
+
