@@ -21,6 +21,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'mysql:mysql-connector-java'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -41,6 +42,7 @@ bootRun.environment([
         "CF_INSTANCE_INDEX" : "Not Set",
         "CF_INSTANCE_ADDR" : "Not set",
         "SPRING_DATASOURCE_URL": developmentDbUrl,
+        "MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE": "*",
 
 ])
 
@@ -51,6 +53,7 @@ test.environment([
         "CF_INSTANCE_INDEX" : "Not Set",
         "CF_INSTANCE_ADDR" : "Not set",
         "SPRING_DATASOURCE_URL": testDbUrl,
+        "MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE": "*",
 ])
 
 
